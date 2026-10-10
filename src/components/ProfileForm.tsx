@@ -63,7 +63,7 @@ export function PreferenceFields({ p, set }: { p: P; set: Set }) {
       </div>
       <div className="space-y-3">
         <Label>Available hours per week: <span className="font-bold text-primary">{p.hours} h</span></Label>
-        <Slider min={1} max={20} step={1} value={[p.hours]} onValueChange={([v]) => set({ hours: v })} aria-label="Hours per week" />
+        <Slider min={1} max={20} step={1} value={[p.hours]} onValueChange={([v]) => set({ hours: v ?? 1 })} aria-label="Hours per week" />
       </div>
       <div className="space-y-1.5">
         <Label htmlFor="budget">Project budget (INR)</Label>

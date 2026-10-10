@@ -3,7 +3,7 @@ import type { Project, SkillReq, Level } from "./types";
 const s = (spec: string): SkillReq[] =>
   spec.split(",").map((x) => {
     const [name, lvl] = x.split(":");
-    return { name: name.trim(), level: Number(lvl ?? 1) as Level };
+    return { name: (name ?? "").trim(), level: Number(lvl ?? 1) as Level };
   });
 
 const HW_SAFETY = [

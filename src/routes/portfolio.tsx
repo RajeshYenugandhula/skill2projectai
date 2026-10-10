@@ -28,7 +28,7 @@ function EditDialog({ up, onClose }: { up: UserProject; onClose: () => void }) {
   const { updateUserProject } = useStore();
   const [f, setF] = useState(up);
   const save = () => {
-    if (!isUrl(f.github) || !isUrl(f.demo)) return toast.error("Links must start with http:// or https://");
+    if (!isUrl(f.github) || !isUrl(f.demo)) { toast.error("Links must start with http:// or https://"); return; }
     updateUserProject(up.id, { github: f.github.trim(), demo: f.demo.trim(), technologies: f.technologies, challenges: f.challenges, learnings: f.learnings });
     toast.success("Portfolio entry updated"); onClose();
   };

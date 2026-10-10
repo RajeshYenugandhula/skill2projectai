@@ -72,7 +72,7 @@ function Landing() {
         <h2 id="roles" className="text-center text-3xl font-bold">Supported career roles</h2>
         <div className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-2">
           {ROLES.map((r, i) => {
-            const Icon = [CircuitBoard, Cpu, Brain, Code2, Database][i % 5];
+            const Icon = [CircuitBoard, Cpu, Brain, Code2, Database][i % 5] ?? Cpu;
             return <span key={r} className="flex items-center gap-2 rounded-full border bg-card px-4 py-2 text-sm font-medium"><Icon className="size-4 text-primary" />{r}</span>;
           })}
         </div>
@@ -96,7 +96,7 @@ function Landing() {
       <section className="mx-auto max-w-2xl py-16" aria-labelledby="faq">
         <h2 id="faq" className="text-center text-3xl font-bold">FAQ</h2>
         <Accordion type="single" collapsible className="mt-6">
-          {FAQ.map(([q, a]) => <AccordionItem key={q} value={q}><AccordionTrigger>{q}</AccordionTrigger><AccordionContent className="text-muted-foreground">{a}</AccordionContent></AccordionItem>)}
+          {(FAQ as [string, string][]).map(([q, a]) => <AccordionItem key={q} value={q}><AccordionTrigger>{q}</AccordionTrigger><AccordionContent className="text-muted-foreground">{a}</AccordionContent></AccordionItem>)}
         </Accordion>
       </section>
     </AppShell>
