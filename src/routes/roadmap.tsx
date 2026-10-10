@@ -20,7 +20,8 @@ function Roadmap() {
   const recs = recommendAll(p, assessments).filter((r) => r.project.roles.includes(p.targetRole) || r.breakdown.role > 0);
   const pick = (d: string) => recs.find((r) => r.project.difficulty === d)?.project;
   const gaps = roleGaps(p, assessments).filter((g) => g.have < g.target);
-  const done = (d: string) => userProjects.some((u) => u.status === "completed" && getProject(u.projectId)?.difficulty === d && getProject(u.projectId)?.roles.some((r) => r === p.targetRole || recs.some((x) => x.project.id === u.projectId)));
+  const relevantIds = new Set(recs.map((r) => r.project.id));
+  const done = (d: string) => userProjects.some((u) => u.status === "completed" && relevantIds.has(u.projectId) && getProject(u.projectId)?.difficulty === d);
   const beg = pick("Beginner"), mid = pick("Intermediate"), adv = pick("Advanced");
   const documented = userProjects.some((u) => u.github.trim());
 

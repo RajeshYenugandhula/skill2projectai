@@ -1,29 +1,19 @@
-# Welcome to your Lovable project
+# Skill2Project AI
 
-This project was built with [Lovable](https://lovable.dev).
+Explainable project recommendations for college students based on skills, target role, budget and weekly time.
 
-## Build with Lovable
-
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+## Run
 ```
+bun install
+bun run dev
+```
+Open the app and click **Try Demo** — no account or API keys required. All data is stored in the browser.
 
-## Built with
+## Recommendation engine (`src/lib/recommend.ts`)
+Deterministic score (0–100): role relevance 35%, skill compatibility 30%, learning value / skill gaps 15%, difficulty fit 10%, budget & time 10%. Budget and time mismatches are reported separately. Verified assessment levels override self-reported levels.
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## Backend (optional)
+`supabase/schema.sql` contains tables, indexes, RLS policies and seed data. See `.env.example`. Never put service-role keys in frontend code.
+
+## Deploy
+Publish from Lovable, or build with `bun run build` and deploy to any edge/Workers host.
