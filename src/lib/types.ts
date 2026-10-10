@@ -51,7 +51,7 @@ export interface Task {
   id: string;
   title: string;
   done: boolean;
-  doneAt?: string;
+  doneAt?: string | undefined;
 }
 
 export interface UserProject {
@@ -59,7 +59,7 @@ export interface UserProject {
   projectId: string;
   status: "in_progress" | "completed";
   startedAt: string;
-  completedAt?: string;
+  completedAt?: string | undefined;
   tasks: Task[];
   github: string;
   demo: string;

@@ -23,8 +23,8 @@ function Settings() {
   const set = (patch: Partial<Profile>) => setP((x) => ({ ...x, ...patch }));
   const dirty = JSON.stringify(p) !== JSON.stringify(profile);
   const save = () => {
-    if (!p.name.trim()) return toast.error("Name is required.");
-    if (!p.skills.length) return toast.error("Add at least one skill.");
+    if (!p.name.trim()) { toast.error("Name is required."); return; }
+    if (!p.skills.length) { toast.error("Add at least one skill."); return; }
     setProfile(p); toast.success("Profile updated — scores recalculated");
   };
   const sec = (t: string, c: React.ReactNode) => <section className="rounded-2xl border bg-card p-6 shadow-card"><h2 className="mb-4 text-lg font-semibold">{t}</h2>{c}</section>;

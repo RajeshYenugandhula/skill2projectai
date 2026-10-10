@@ -36,7 +36,7 @@ function Assessment() {
           {ordered.map((s) => { const r = assessments.find((a) => a.skill === s); const self = profile!.skills.find((x) => x.name === s); return (
             <button key={s} onClick={() => { setSkill(s); setAnswers({}); setSubmitted(false); }} className="rounded-2xl border bg-card p-5 text-left shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/50">
               <h2 className="font-semibold">{s}</h2>
-              <p className="text-xs text-muted-foreground">{QUESTIONS[s].length} questions</p>
+              <p className="text-xs text-muted-foreground">{QUESTIONS[s]?.length ?? 0} questions</p>
               <div className="mt-3 flex flex-wrap gap-1">{self && <Badge variant="outline">Self: {LEVEL_LABEL[self.level]}</Badge>}{r ? <Badge>Verified: {LEVEL_LABEL[r.level]} ({r.correct}/{r.total})</Badge> : <Badge variant="secondary">Not taken</Badge>}</div>
             </button>
           ); })}
@@ -44,12 +44,12 @@ function Assessment() {
       </div>
     );
 
-  const qs = QUESTIONS[skill];
+  const qs = QUESTIONS[skill] ?? [];
   const correct = qs.filter((q, i) => answers[i] === q.answer).length;
   const ratio = correct / qs.length;
   const level: Level = ratio >= 0.85 ? 3 : ratio >= 0.5 ? 2 : 1;
   const submit = () => {
-    if (Object.keys(answers).length < qs.length) return toast.error("Please answer all questions.");
+    if (Object.keys(answers).length < qs.length) { toast.error("Please answer all questions."); return; }
     setSubmitted(true);
     addAssessment({ skill, correct, total: qs.length, level, date: new Date().toISOString() });
     toast.success(`${skill}: ${LEVEL_LABEL[level]} level verified`);
